@@ -1,0 +1,61 @@
+# ArduPilot SITL + Gazebo Harmonic + ROS 2 Humble. See docker/README.md.
+#
+#   NVIDIA:            docker compose up -d sim
+#   Intel/AMD/no GPU:  docker compose --profile dri up -d sim-dri
+
+x-env: &env
+  DISPLAY: ${DISPLAY:-:0}
+  QT_X11_NO_MITSHM: "1"
+  ROS_DOMAIN_ID: ${ROS_DOMAIN_ID:-121}
+  # Extra MAVProxy outputs per drone (scripts/start_drones.sh). Empty = off.
+  REMOTE_GCS_HOST: ${REMOTE_GCS_HOST:-}
+
+x-sim: &sim
+  image: ardupilot-gazebo-swarm:latest
+  build:
+    context: .
+    dockerfile: docker/Dockerfile
+    args:
+      HOST_UID: ${HOST_UID:-1000}
+      HOST_GID: ${HOST_GID:-1000}
+  # Host networking: QGroundControl / remote GCS see UDP 14550+10*N directly,
+  # and ROS 2 DDS + gz-transport discovery work across host and container.
+  network_mode: host
+  ipc: host
+  environment: *env
+  volumes:
+    - /tmp/.X11-unix:/tmp/.X11-unix:rw
+    # Edited often; mounted so changes apply without a rebuild.
+    - ./worlds:/home/sim/ardupilot_gazebo/worlds
+    - ./config:/home/sim/ardupilot_gazebo/config
+    - ./scripts:/home/sim/ardupilot_gazebo/scripts
+  stdin_open: true
+  tty: true
+
+services:
+  sim:
+    <<: *sim
+    container_name: ardupilot-sim
+    environment:
+      <<: *env
+      NVIDIA_VISIBLE_DEVICES: all
+      NVIDIA_DRIVER_CAPABILITIES: all
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+  sim-dri:
+    <<: *sim
+    container_name: ardupilot-sim-dri
+    profiles: [dri]
+    devices:
+      - /dev/dri:/dev/dri
+    # The image's sim user is already in "video" (card*). renderD* belongs to
+    # the host's "render" group, whose GID varies:
+    #   RENDER_GID=$(getent group render | cut -d: -f3)
+    group_add:
+      - ${RENDER_GID:-video}

@@ -1,0 +1,17 @@
+# Separate repo, unrelated to this image.
+meity_grand_challenge/
+
+.git
+build/
+logs/
+mav_gazebo/
+# Regenerated in the image by tools/gen_swarm.py.
+models/drone_*/
+
+eeprom.bin
+mav.parm
+*.tlog
+*.tlog.raw
+*.backup
+worlds/*backup*
+**/__pycache__

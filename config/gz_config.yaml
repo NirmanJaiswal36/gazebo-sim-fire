@@ -1,0 +1,47 @@
+- ros_topic_name: /drone_0/camera/image
+  gz_topic_name: /world/forest/model/drone_0/model/gimbal/link/pitch_link/sensor/camera/image
+  ros_type_name: sensor_msgs/msg/Image
+  gz_type_name: gz.msgs.Image
+  direction: GZ_TO_ROS
+
+- ros_topic_name: /drone_1/camera/image
+  gz_topic_name: /world/forest/model/drone_1/model/gimbal/link/pitch_link/sensor/camera/image
+  ros_type_name: sensor_msgs/msg/Image
+  gz_type_name: gz.msgs.Image
+  direction: GZ_TO_ROS
+
+- ros_topic_name: /drone_2/camera/image
+  gz_topic_name: /world/forest/model/drone_2/model/gimbal/link/pitch_link/sensor/camera/image
+  ros_type_name: sensor_msgs/msg/Image
+  gz_type_name: gz.msgs.Image
+  direction: GZ_TO_ROS
+
+- ros_topic_name: /drone_3/camera/image
+  gz_topic_name: /world/forest/model/drone_3/model/gimbal/link/pitch_link/sensor/camera/image
+  ros_type_name: sensor_msgs/msg/Image
+  gz_type_name: gz.msgs.Image
+  direction: GZ_TO_ROS
+
+- ros_topic_name: /drone_4/camera/image
+  gz_topic_name: /world/forest/model/drone_4/model/gimbal/link/pitch_link/sensor/camera/image
+  ros_type_name: sensor_msgs/msg/Image
+  gz_type_name: gz.msgs.Image
+  direction: GZ_TO_ROS
+
+- ros_topic_name: /drone_5/camera/image
+  gz_topic_name: /world/forest/model/drone_5/model/gimbal/link/pitch_link/sensor/camera/image
+  ros_type_name: sensor_msgs/msg/Image
+  gz_type_name: gz.msgs.Image
+  direction: GZ_TO_ROS
+
+- ros_topic_name: /drone_6/camera/image
+  gz_topic_name: /world/forest/model/drone_6/model/gimbal/link/pitch_link/sensor/camera/image
+  ros_type_name: sensor_msgs/msg/Image
+  gz_type_name: gz.msgs.Image
+  direction: GZ_TO_ROS
+
+- ros_topic_name: /drone_7/camera/image
+  gz_topic_name: /world/forest/model/drone_7/model/gimbal/link/pitch_link/sensor/camera/image
+  ros_type_name: sensor_msgs/msg/Image
+  gz_type_name: gz.msgs.Image
+  direction: GZ_TO_ROS
